@@ -1,0 +1,39 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Test {
+    id         String      @id @default(uuid())
+    date       DateTime
+    lab        String
+    comment    String?
+    substances Substance[] @relation(name: "SubstanceToTest")
+
+    @@index([id])
+}
+
+model Substance {
+    id    String        @id @default(uuid())
+    name  SubstanceName
+    value Float
+    min   Float
+    max   Float
+
+    testId String
+    test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest")
+
+    @@index([id, testId])
+}
+
+enum SubstanceName {
+    RED_BLOOD_CELLS
+    WHITE_BLOOD_CELLS
+    HEMOGLOBIN
+    SODIUM
+    POTASSIUM
+}
