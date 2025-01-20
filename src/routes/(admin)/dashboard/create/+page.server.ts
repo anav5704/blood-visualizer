@@ -20,8 +20,7 @@ export const actions: Actions = {
 
         if (!date || !lab) {
             return {
-                success: false,
-                message: "Some required fields are missing."
+                message: "Required fields are missing."
             }
         }
 
@@ -63,18 +62,14 @@ export const actions: Actions = {
                 })
             })
 
-            return {
-                success: true,
-                message: "Blood test results added successfully."
-            }
-
         } catch (error) {
             console.log(error)
 
             return {
-                success: false,
                 message: "There was an internal server error."
             }
         }
+
+        redirect(303, "/dashboard")
     }
 }

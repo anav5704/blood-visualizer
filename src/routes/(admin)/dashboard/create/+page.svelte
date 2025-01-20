@@ -32,5 +32,5 @@
 </form>
 
 {#if form?.message}
-    <p class={form?.success ? "success" : "error"}>{form?.message}</p>
+    <p class="error">{form?.message}</p>
 {/if}
