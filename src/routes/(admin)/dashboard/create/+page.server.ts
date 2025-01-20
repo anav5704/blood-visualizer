@@ -9,7 +9,7 @@ export const load = async ({ parent }) => {
 export const actions: Actions = {
     default: async ({ request, locals }) => {
         if (!locals.user) {
-            redirect(303, "login")
+            redirect(303, "/login")
         }
 
         const data = await request.formData()
@@ -29,6 +29,7 @@ export const actions: Actions = {
         const mins = data.getAll('min[]') as string[]
         const maxs = data.getAll('max[]') as string[]
 
+        const testId = crypto.randomUUID()
         const substances: Substance[] = []
 
         names.forEach((name, index) => {
@@ -39,7 +40,7 @@ export const actions: Actions = {
                     value: parseFloat(values[index]),
                     min: parseFloat(mins[index]),
                     max: parseFloat(maxs[index]),
-                    testId: "",
+                    testId,
                 })
             }
         })
@@ -48,6 +49,7 @@ export const actions: Actions = {
             await db.$transaction(async (tx) => {
                 const test = await tx.test.create({
                     data: {
+                        id: testId,
                         date: new Date(date),
                         lab,
                         comment
@@ -55,10 +57,7 @@ export const actions: Actions = {
                 })
 
                 await tx.substance.createMany({
-                    data: substances.map((substance) => ({
-                        ...substance,
-                        testId: test.id
-                    }))
+                    data: substances
                 })
             })
 
