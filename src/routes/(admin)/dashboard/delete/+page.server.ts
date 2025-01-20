@@ -18,7 +18,7 @@ export const load = async ({ parent, url }) => {
 export const actions: Actions = {
     default: async ({ request, locals }) => {
         if (!locals.user) {
-            redirect(303, "login")
+            redirect(303, "/login")
         }
 
         const data = await request.formData()
