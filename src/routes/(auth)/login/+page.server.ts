@@ -3,7 +3,7 @@ import { redirect, type Actions } from "@sveltejs/kit"
 
 export const load = async ({ locals }) => {
     if (locals.user) {
-        redirect(303, "dashboard")
+        redirect(303, "/dash")
     }
 }
 
@@ -31,6 +31,6 @@ export const actions: Actions = {
             maxAge: 60 * 60 * 24 * 7
         })
 
-        redirect(303, "dashboard")
+        redirect(303, "/dash")
     }
 }
