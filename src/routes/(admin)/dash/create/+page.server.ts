@@ -46,20 +46,20 @@ export const actions: Actions = {
         })
 
         try {
-            await db.$transaction(async (tx) => {
-                const test = await tx.test.create({
+            await db.$transaction([
+                db.test.create({
                     data: {
                         id: testId,
                         date: new Date(date),
                         lab,
                         comment
                     }
-                })
+                }),
 
-                await tx.substance.createMany({
+                db.substance.createMany({
                     data: substances
                 })
-            })
+            ])
 
         } catch (error) {
             console.log(error)
