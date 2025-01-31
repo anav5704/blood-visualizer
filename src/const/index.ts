@@ -5,5 +5,5 @@ export const substanceNames = [
     SubstanceName.RED_BLOOD_CELLS,
     SubstanceName.WHITE_BLOOD_CELLS,
     SubstanceName.POTASSIUM,
-    SubstanceName.POTASSIUM
+    SubstanceName.SODIUM,
 ]
