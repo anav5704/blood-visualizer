@@ -56,28 +56,27 @@ export const actions: Actions = {
         })
 
         try {
-            await db.$transaction(async (tx) => {
-                await tx.test.update({
+            await db.$transaction([
+                db.test.update({
                     where: {
                         id
                     },
                     data: {
-                        date: new Date(date),
                         lab,
                         comment
                     }
-                })
+                }),
 
-                await tx.substance.deleteMany({
+                db.substance.deleteMany({
                     where: {
                         testId: id
                     }
-                })
+                }),
 
-                await tx.substance.createMany({
+                db.substance.createMany({
                     data: substances
-                })
-            })
+                }),
+            ])
 
         } catch (error) {
             console.log(error)
