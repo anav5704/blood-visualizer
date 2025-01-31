@@ -25,7 +25,7 @@ model Substance {
     max   Float
 
     testId String
-    test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest")
+    test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest", onDelete: Cascade)
 
     @@index([id, testId])
 }
