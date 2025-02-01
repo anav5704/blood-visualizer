@@ -1,6 +1,6 @@
 <script lang="ts">
     import SubstanceCard from "@/components/guest/SubstanceCard.svelte";
-    import { substanceNames } from "@/const";
+    import { substanceNames } from "@/utils/const";
 
     const { data } = $props();
 </script>

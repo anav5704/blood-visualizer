@@ -1,7 +1,7 @@
 <script lang="ts">
     import { getSingularStatus } from "@/utils/getSingularStatus";
     import type { Substance } from "@prisma/client";
-    import { Status } from "@/utils/const/status";
+    import { Status } from "@/utils/const";
 
     const { data } = $props();
 
