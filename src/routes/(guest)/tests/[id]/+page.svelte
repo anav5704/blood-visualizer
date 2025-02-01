@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { Status } from "@/utils/const/status.js";
-    import { getStatus } from "@/utils/getStatus.js";
+    import { getSingularStatus } from "@/utils/getSingularStatus";
     import type { Substance } from "@prisma/client";
+    import { Status } from "@/utils/const/status";
 
     const { data } = $props();
 
     const getColor = (substance: Substance) => {
-        const status = getStatus(substance);
+        const status = getSingularStatus(substance);
 
         if (status === Status.good) {
             return "text-emerald-500";

@@ -1,1 +1,1 @@
-<h1>Substance page</h1>
+<h1>Substance Name Page</h1>

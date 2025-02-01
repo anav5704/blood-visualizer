@@ -1,4 +1,4 @@
-import { getTestStatus } from "@/utils/getTestStatus."
+import { getAggregateStatus } from "@/utils/getAggregateStatus"
 import { db } from "@/prisma"
 
 export const load = async () => {
@@ -13,7 +13,7 @@ export const load = async () => {
 
     const tests = rawTests.map((test) => ({
         ...test,
-        status: getTestStatus(test.substances)
+        status: getAggregateStatus(test.substances)
     }))
 
     return { tests }

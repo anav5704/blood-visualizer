@@ -1,5 +1,5 @@
 import { redirect, type Actions } from "@sveltejs/kit"
-import { db } from "@/prisma/index.js"
+import { db } from "@/prisma"
 
 export const load = async ({ parent, params: { id } }) => {
     await parent()

@@ -1,5 +1,5 @@
-import { getSubstanceStatus } from "@/utils/getSubstanceStatus"
-import { substanceNames } from "@/const"
+import { getAggregateStatus } from "@/utils/getAggregateStatus"
+import { substanceNames } from "@/utils/const"
 import { db } from "@/prisma"
 
 export const load = async () => {
@@ -16,7 +16,7 @@ export const load = async () => {
 
         return {
             name,
-            status: getSubstanceStatus(substance)
+            status: getAggregateStatus(substance)
         }
     })
 

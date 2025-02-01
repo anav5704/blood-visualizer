@@ -1,5 +1,5 @@
-import { db } from "@/prisma"
 import { error } from "@sveltejs/kit"
+import { db } from "@/prisma"
 
 export const load = async ({ params: { id } }) => {
     const test = await db.test.findUnique({

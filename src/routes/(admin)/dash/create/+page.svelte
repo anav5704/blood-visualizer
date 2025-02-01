@@ -1,6 +1,6 @@
 <script lang="ts">
     import Error from "@/components/Error.svelte";
-    import { substanceNames } from "@/const";
+    import { substanceNames } from "@/utils/const";
     import { enhance } from "$app/forms";
     const { form } = $props();
 </script>

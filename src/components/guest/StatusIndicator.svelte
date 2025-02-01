@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Status } from "@/utils/const/status";
+    import { Status } from "@/utils/const";
 
     const { status } = $props();
 
