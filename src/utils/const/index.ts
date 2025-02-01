@@ -7,3 +7,10 @@ export const substanceNames = [
     SubstanceName.POTASSIUM,
     SubstanceName.SODIUM,
 ]
+
+export enum Status {
+    "good",
+    "ok",
+    "bad"
+
+}
