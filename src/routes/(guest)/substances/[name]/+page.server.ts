@@ -14,6 +14,11 @@ export const load = async ({ params }) => {
                     date: true
                 }
             }
+        },
+        orderBy: {
+            test: {
+                date: "asc"
+            }
         }
     })
 
