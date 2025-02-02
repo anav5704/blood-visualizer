@@ -20,7 +20,12 @@
         @apply flex flex-col gap-5;
     }
 
+    hr {
+        @apply border-zinc-800;
+    }
+
     input,
+    select,
     textarea,
     button {
         @apply card bg-zinc-900 placeholder:text-zinc-500;
@@ -39,4 +44,8 @@
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
+}
+
+.cds--cc--grid rect.chart-grid-backdrop {
+    fill: transparent !important;
 }
