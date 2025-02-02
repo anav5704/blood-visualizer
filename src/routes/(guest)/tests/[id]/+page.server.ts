@@ -1,8 +1,9 @@
+import { Substances } from "@/utils/const/index.js"
 import { error } from "@sveltejs/kit"
 import { db } from "@/prisma"
 
 export const load = async ({ params: { id } }) => {
-    const test = await db.test.findUnique({
+    let test = await db.test.findUnique({
         where: {
             id
         },

@@ -18,8 +18,8 @@ model Test {
 }
 
 model Substance {
-    id    String        @id @default(uuid())
-    name  SubstanceName
+    id    String @id @default(uuid())
+    name  String
     value Float
     min   Float
     max   Float
@@ -28,12 +28,4 @@ model Substance {
     test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest", onDelete: Cascade)
 
     @@index([id, testId])
-}
-
-enum SubstanceName {
-    RED_BLOOD_CELLS
-    WHITE_BLOOD_CELLS
-    HEMOGLOBIN
-    SODIUM
-    POTASSIUM
 }

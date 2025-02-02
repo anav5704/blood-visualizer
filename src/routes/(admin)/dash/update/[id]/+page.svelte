@@ -1,6 +1,6 @@
 <script lang="ts">
     import Error from "@/components/Error.svelte";
-    import { substanceNames } from "@/utils/const";
+    import { Substances } from "@/utils/const";
     import { enhance } from "$app/forms";
     const { data, form } = $props();
 
@@ -43,26 +43,26 @@
     <textarea placeholder="Comment" name="comment" value={data.test?.comment}
     ></textarea>
 
-    {#each substanceNames as substanceName}
-        {@const existingSubstance = data?.test?.substances.find(
-            (substance) => substance.name === substanceName
+    {#each Substances as { name }}
+        {@const exists = data?.test?.substances.find(
+            (substance) => substance.name === name
         )}
         <div class="grid grid-cols-3 gap-5 items-end">
-            <input type="text" name="name[]" value={substanceName} hidden />
+            <input type="text" name="name[]" value={name} hidden />
             <input
-                value={existingSubstance ? existingSubstance.value : ""}
-                placeholder={substanceName}
+                value={exists ? exists.value : ""}
+                placeholder={name}
                 type="number"
                 name="value[]"
             />
             <input
-                value={existingSubstance ? existingSubstance.min : ""}
+                value={exists ? exists.min : ""}
                 placeholder="Min"
                 type="number"
                 name="min[]"
             />
             <input
-                value={existingSubstance ? existingSubstance.max : ""}
+                value={exists ? exists.max : ""}
                 placeholder="Max"
                 type="number"
                 name="max[]"

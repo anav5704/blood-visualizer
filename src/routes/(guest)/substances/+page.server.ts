@@ -1,9 +1,9 @@
 import { getAggregateStatus } from "@/utils/getAggregateStatus"
-import { substanceNames } from "@/utils/const"
+import { Substances } from "@/utils/const"
 import { db } from "@/prisma"
 
 export const load = async () => {
-    const substances = await db.substance.findMany({
+    const rawSubstances = await db.substance.findMany({
         orderBy: {
             test: {
                 date: 'desc'
@@ -11,14 +11,15 @@ export const load = async () => {
         }
     })
 
-    const groupedSubstances = substanceNames.map((name) => {
-        const substance = substances.filter(substance => substance.name === name)
+    const substances = Substances.map(({ name, category }) => {
+        const substance = rawSubstances.filter(substance => substance.name === name)
 
         return {
             name,
+            category,
             status: getAggregateStatus(substance)
         }
     })
 
-    return { groupedSubstances }
+    return { substances }
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
     import Error from "@/components/Error.svelte";
-    import { substanceNames } from "@/utils/const";
+    import { Substances } from "@/utils/const";
     import { enhance } from "$app/forms";
     const { form } = $props();
 </script>
@@ -25,10 +25,10 @@
     </div>
     <textarea placeholder="Comment" name="comment" rows={3}></textarea>
 
-    {#each substanceNames as substanceName}
+    {#each Substances as { name }}
         <div class="grid grid-cols-3 gap-5 items-center">
-            <input type="text" name="name[]" value={substanceName} hidden />
-            <input placeholder={substanceName} type="number" name="value[]" />
+            <input type="text" name="name[]" value={name} hidden />
+            <input placeholder={name} type="number" name="value[]" />
             <input placeholder="Min" type="number" name="min[]" />
             <input placeholder="Max" type="number" name="max[]" />
         </div>

@@ -1,5 +1,5 @@
-import type { Substance, SubstanceName } from "@prisma/client"
 import { type Actions, redirect } from "@sveltejs/kit"
+import type { Substance } from "@prisma/client"
 import { db } from "@/prisma"
 
 export const load = async ({ parent, params: { id } }) => {
@@ -46,7 +46,7 @@ export const actions: Actions = {
             if (values[index]) {
                 substances.push({
                     id: crypto.randomUUID(),
-                    name: name as SubstanceName,
+                    name,
                     value: parseFloat(values[index]),
                     min: parseFloat(mins[index]),
                     max: parseFloat(maxs[index]),
