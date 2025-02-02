@@ -40,6 +40,10 @@
     .card {
         @apply px-6 py-3 rounded-xl bg-zinc-900;
     }
+
+    .faded {
+        @apply text-zinc-500;
+    }
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
