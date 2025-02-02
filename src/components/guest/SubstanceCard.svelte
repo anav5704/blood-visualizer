@@ -9,7 +9,7 @@
 >
     <div>
         <p>{substance.name}</p>
-        <p class="text-zinc-500">{substance.category}</p>
+        <p class="faded">{substance.category}</p>
     </div>
     <StatusIndicator status={substance.status} />
 </a>

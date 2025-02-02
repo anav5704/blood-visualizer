@@ -7,7 +7,7 @@
 <div class="group card flex justify-between items-center">
     <div>
         <p>{test.lab}</p>
-        <p class="text-zinc-500">{test.date.toDateString()}</p>
+        <p class="faded">{test.date.toDateString()}</p>
     </div>
     <div class="flex">
         <a
