@@ -15,7 +15,7 @@
         props={{
             highlight: {
                 points: {
-                    class: "stroke-2 stroke-white fill-zinc-900",
+                    class: "stroke-1 stroke-white fill-zinc-900",
                 },
             },
         }}
@@ -40,7 +40,7 @@
                 let:gradient
             >
                 <Area
-                    line={{ class: "stroke-white stroke-2" }}
+                    line={{ class: "stroke-white stroke-1" }}
                     curve={curveCatmullRom}
                     fill={gradient}
                 />
