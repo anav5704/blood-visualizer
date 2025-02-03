@@ -1,6 +1,6 @@
 <script lang="ts">
+    import ListLoader from "@/components/guest/ListLoader.svelte";
     import TestCard from "@/components/admin/TestCard.svelte";
-    import { SquarePen, Trash2 } from "lucide-svelte";
 
     const { data } = $props();
 </script>
@@ -12,6 +12,10 @@
     <a class="card" href="/dash/create">Add Results</a>
 </div>
 
-{#each data.tests as test}
-    <TestCard {test} />
-{/each}
+{#await data.stream}
+    <ListLoader />
+{:then stream}
+    {#each stream.tests as test}
+        <TestCard {test} />
+    {/each}
+{/await}
