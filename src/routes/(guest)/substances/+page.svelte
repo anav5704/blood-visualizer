@@ -1,4 +1,5 @@
 <script lang="ts">
+    import ListLoader from "@/components/guest/ListLoader.svelte";
     import SubstanceCard from "@/components/guest/SubstanceCard.svelte";
 
     const { data } = $props();
@@ -6,6 +7,10 @@
 
 <h1>Substances</h1>
 
-{#each data.substances as substance}
-    <SubstanceCard {substance} />
-{/each}
+{#await data.stream}
+    <ListLoader />
+{:then stream}
+    {#each stream.substances as substance}
+        <SubstanceCard {substance} />
+    {/each}
+{/await}
