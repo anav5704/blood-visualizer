@@ -4,11 +4,11 @@
         <p class="opacity-0 text-3xl">e</p>
     </div>
     <div class="card animate-pulse">
-        <p class="opacity-0">e</p>
-        <p class="opacity-0 text-3xl">e</p>
+        <p class="opacity-0">Loading...</p>
+        <p class="opacity-0 text-3xl">Loading...</p>
     </div>
     <div class="card animate-pulse">
-        <p class="opacity-0">e</p>
-        <p class="opacity-0 text-3xl">e</p>
+        <p class="opacity-0">Loading...</p>
+        <p class="opacity-0 text-3xl">Loading...</p>
     </div>
 </div>
