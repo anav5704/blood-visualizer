@@ -14,9 +14,9 @@
     <TableLoader />
 {:then stream}
     <div class="grid grid-cols-3 gap-5">
-        <CountCard label="Total Tests" value={stream.count.test} />
-        <CountCard label="Total Substances" value={stream.count.substance} />
-        <CountCard label="Healthy Results" value={stream.count.healthy + "%"} />
+        <CountCard label="Total Tests" value={stream.testCount} />
+        <CountCard label="Total Substances" value={stream.substanceCount} />
+        <CountCard label="Healthy Results" value={stream.healthyCount + "%"} />
     </div>
 
     <TestTable test={stream.test} />
