@@ -2,6 +2,9 @@
     import Error from "@/components/admin/Error.svelte";
     import { Substances } from "@/utils/const";
     import { enhance } from "$app/forms";
+
+    let loading = $state(false);
+
     const { form } = $props();
 </script>
 
@@ -10,8 +13,11 @@
 <form
     method="POST"
     use:enhance={() => {
+        loading = true;
         return async ({ update }) => {
-            update({ reset: false });
+            update({ reset: false }).finally(async () => {
+                loading = false;
+            });
         };
     }}
 >
@@ -30,7 +36,9 @@
         </div>
     {/each}
 
-    <button>Add Results</button>
+    <button disabled={loading}>
+        {loading ? "Loading..." : "Add Results"}
+    </button>
 
     {#if form?.message}
         <Error message={form.message} />
