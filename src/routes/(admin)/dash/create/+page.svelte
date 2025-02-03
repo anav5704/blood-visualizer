@@ -1,15 +1,11 @@
 <script lang="ts">
-    import Error from "@/components/Error.svelte";
+    import Error from "@/components/admin/Error.svelte";
     import { Substances } from "@/utils/const";
     import { enhance } from "$app/forms";
     const { form } = $props();
 </script>
 
 <h1>Add Results</h1>
-
-{#if form?.message}
-    <Error message={form.message} />
-{/if}
 
 <form
     method="POST"
@@ -35,4 +31,8 @@
     {/each}
 
     <button>Add Results</button>
+
+    {#if form?.message}
+        <Error message={form.message} />
+    {/if}
 </form>

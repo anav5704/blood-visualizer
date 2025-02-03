@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Navbar from "@/components/Navbar.svelte";
+    import Navbar from "@/components/shared/Navbar.svelte";
     import "@fontsource-variable/dm-sans";
     import "../app.css";
 
