@@ -1,5 +1,7 @@
 <script lang="ts">
+    import CardLoader from "@/components/guest/CardLoader.svelte";
     import CountCard from "@/components/guest/CountCard.svelte";
+    import TableLoader from "@/components/guest/TableLoader.svelte";
     import TestTable from "@/components/guest/TestTable.svelte";
 
     const { data } = $props();
@@ -7,10 +9,15 @@
 
 <h1>Overview</h1>
 
-<div class="grid grid-cols-3 gap-5">
-    <CountCard label="Total Tests" value={data.count.test} />
-    <CountCard label="Total Substances" value={data.count.substance} />
-    <CountCard label="Healthy Results" value={data.count.healthy + "%"} />
-</div>
+{#await data.stream}
+    <CardLoader />
+    <TableLoader />
+{:then stream}
+    <div class="grid grid-cols-3 gap-5">
+        <CountCard label="Total Tests" value={stream.count.test} />
+        <CountCard label="Total Substances" value={stream.count.substance} />
+        <CountCard label="Healthy Results" value={stream.count.healthy + "%"} />
+    </div>
 
-<TestTable test={data.test} />
+    <TestTable test={stream.test} />
+{/await}

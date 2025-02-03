@@ -1,7 +1,7 @@
 import { db } from "@/prisma"
 
 export const load = async () => {
-    const [test, testCount, substanceCount, healthyCount] = await db.$transaction([
+    const data = db.$transaction([
         db.test.findFirst({
             include: {
                 substances: true,
@@ -26,11 +26,13 @@ export const load = async () => {
     ])
 
     return {
-        test,
-        count: {
-            test: testCount,
-            substance: substanceCount,
-            healthy: Math.floor((healthyCount / substanceCount) * 100)
-        }
+        stream: data.then(([test, testCount, substanceCount, healthyCount]) => ({
+            test,
+            count: {
+                test: testCount,
+                substance: substanceCount,
+                healthy: Math.floor((healthyCount / substanceCount) * 100)
+            }
+        }))
     }
 }
