@@ -1,12 +1,10 @@
 export enum Status {
     "good",
     "ok",
-    "bad"
-
+    "bad",
 }
 
 export const Substances = [
-
     // Bloods
 
     {
@@ -125,4 +123,4 @@ export const Substances = [
         name: "Testosterone",
         category: "Hormone",
     },
-]
+];
