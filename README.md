@@ -1,38 +1,42 @@
-# sv
+# Blood Visualizer
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This is a web application I made to visualize all my blood tests. Since I get my bloods done regularly, I wanted a nice UI to see the results and trends. The main pages are the `test/[id]` page which shows the results of a blood test with colored status indicators, and the `substances/[name]` page which shows how a substance has changed overtime using an area chart.
 
-## Creating a project
+## Tech Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- SvelteKit 5
+- TailwindCSS
+- LayerCharts
+- Prisma ORM
+- Neon PostgreSQL
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Getting Started
 
-# create a new project in my-app
-npx sv create my-app
+First fork and clone the repo. Then, run `pnpm install` to download all the dependencies. Now, set up your environmental variables. Make a `.env` file in the root of your project with the following variables:
+
+```sh
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/database
+PASSWORD=secure-password
 ```
 
-## Developing
+The `PASSWORD` variable will hold your actual password, which you will have to enter in the login page. Once you have added your variables, run `pnpm dev` to view it on [localhost:5173](http://localhost:5173).
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+If you want to add or remove substances from blood test results, modify the `src/utils/const/index.ts` file:
 
-```bash
-npm run dev
+```ts
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+export const Substances = [
+    // Add or remove substances from here.
+    {
+        id: "wbc",
+        name: "White Blood Cells",
+        category: "Blood",
+    },
+]
 ```
 
-## Building
+## Learning Resources
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- [SvelteKit 5 lazy load data](https://svelte.dev/docs/svelte/await)
+- [SvelteKit 5 docs](https://svelte.dev)
+- [LayerChart docs](https://www.layerchart.com)
