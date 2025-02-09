@@ -1,4 +1,4 @@
-# Blood Visualizer
+# Blood Visualizer 📈
 
 This is a web application I made to visualize all my blood tests. Since I get my bloods done regularly, I wanted a nice UI to see the results and trends. The main pages are the `test/[id]` page which shows the results of a blood test with colored status indicators, and the `substances/[name]` page which shows how a substance has changed overtime using an area chart.
 
