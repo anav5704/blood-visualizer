@@ -25,24 +25,37 @@
         };
     }}
 >
-    <div class="grid gap-5 grid-cols-2">
+    <label>
+        Test Date
         <input placeholder="Date" name="date" type="date" required />
+    </label>
+
+    <label>
+        Lab Preset
         <select name="lab" bind:value={lab}>
             {#each LabPresets as { name }}
                 <option value={name}>{name}</option>
             {/each}
         </select>
-    </div>
-    <textarea placeholder="Comment" name="comment" rows={3}></textarea>
+    </label>
 
     {#each Substances as { id, name }}
-        <div class="grid grid-cols-3 gap-5 items-center">
+        <label>
+            <div class="flex gap-2">
+                <p>{name}</p>
+                <p class="faded">
+                    {values[id].min}-{values[id].max}
+                </p>
+            </div>
             <input type="text" name="name[]" value={name} hidden />
             <input placeholder={name} type="string" name="value[]" />
-            <input type="string" name="min[]" value={values[id].min} />
-            <input type="string" name="max[]" value={values[id].max} />
-        </div>
+        </label>
     {/each}
+
+    <label>
+        Comment
+        <textarea placeholder="Comment" name="comment" rows={3}></textarea>
+    </label>
 
     <button disabled={loading}>
         {loading ? "Loading..." : "Add Results"}

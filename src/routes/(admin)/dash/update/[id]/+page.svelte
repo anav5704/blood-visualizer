@@ -30,7 +30,9 @@
     }}
 >
     <input type="text" name="id" value={data?.test?.id} hidden />
-    <div class="grid gap-5 grid-cols-2">
+
+    <label>
+        Test Date
         <input
             value={formattedDate}
             placeholder="Date"
@@ -38,41 +40,47 @@
             name="date"
             required
         />
+    </label>
+
+    <label>
+        Lab Preset
         <select name="lab" bind:value={lab}>
             {#each LabPresets as { name }}
                 <option value={name}>{name}</option>
             {/each}
         </select>
-    </div>
-    <textarea placeholder="Comment" name="comment" value={data.test?.comment}
-    ></textarea>
+    </label>
 
     {#each Substances as { id, name }}
         {@const exists = data?.test?.substances.find(
             (substance) => substance.name === name
         )}
-        <div class="grid grid-cols-3 gap-5 items-end">
+        <label>
+            <div class="flex gap-2">
+                <p>{name}</p>
+                <p class="faded">
+                    {values[id].min}-{values[id].max}
+                </p>
+            </div>
             <input type="text" name="name[]" value={name} hidden />
             <input
                 value={exists ? exists.value : ""}
                 placeholder={name}
-                type="number"
+                type="string"
                 name="value[]"
             />
-            <input
-                value={values[id].min}
-                placeholder="Min"
-                type="number"
-                name="min[]"
-            />
-            <input
-                value={values[id].max}
-                placeholder="Max"
-                type="number"
-                name="max[]"
-            />
-        </div>
+        </label>
     {/each}
+
+    <label>
+        Comment
+        <textarea
+            rows={3}
+            placeholder="Comment"
+            name="comment"
+            value={data.test?.comment}
+        ></textarea>
+    </label>
 
     <button disabled={loading}>
         {loading ? "Loading..." : "Update Results"}
