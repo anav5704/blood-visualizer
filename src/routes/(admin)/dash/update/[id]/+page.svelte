@@ -1,11 +1,15 @@
 <script lang="ts">
+    import { LabPresets, Substances, type ValueType } from "@/utils/const";
     import Error from "@/components/admin/Error.svelte";
-    import { Substances } from "@/utils/const";
     import { enhance } from "$app/forms";
 
-    let loading = $state(false);
-
     const { data, form } = $props();
+
+    let loading = $state(false);
+    let lab = $state(data.test?.lab);
+    let values = $derived<ValueType>(
+        LabPresets.find((l) => l.name === lab)?.values || {}
+    );
 
     const formattedDate = new Date(data?.test?.date as Date)
         .toISOString()
@@ -34,18 +38,16 @@
             name="date"
             required
         />
-        <input
-            value={data.test?.lab}
-            placeholder="Lab"
-            type="text"
-            name="lab"
-            required
-        />
+        <select name="lab" bind:value={lab}>
+            {#each LabPresets as { name }}
+                <option value={name}>{name}</option>
+            {/each}
+        </select>
     </div>
     <textarea placeholder="Comment" name="comment" value={data.test?.comment}
     ></textarea>
 
-    {#each Substances as { name }}
+    {#each Substances as { id, name }}
         {@const exists = data?.test?.substances.find(
             (substance) => substance.name === name
         )}
@@ -58,13 +60,13 @@
                 name="value[]"
             />
             <input
-                value={exists ? exists.min : ""}
+                value={values[id].min}
                 placeholder="Min"
                 type="number"
                 name="min[]"
             />
             <input
-                value={exists ? exists.max : ""}
+                value={values[id].max}
                 placeholder="Max"
                 type="number"
                 name="max[]"
