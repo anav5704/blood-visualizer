@@ -10,7 +10,7 @@ datasource db {
 model Test {
     id         String      @id @default(uuid())
     date       DateTime
-    lab        String
+    lab        String // lab names are hard coded in the application: src/utils/const/index.ts
     comment    String?
     substances Substance[] @relation(name: "SubstanceToTest")
 
@@ -19,10 +19,8 @@ model Test {
 
 model Substance {
     id    String @id @default(uuid())
-    name  String
-    value Float
-    min   Float
-    max   Float
+    name  String // substance names are hard coded in the application: src/utils/const/index.ts
+    value Float // substance value range is hardcoded in the application: src/utils/const/index.ts
 
     testId String
     test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest", onDelete: Cascade)
