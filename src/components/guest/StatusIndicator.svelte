@@ -1,19 +1,17 @@
 <script lang="ts">
-    import { Status } from "@/utils/const";
-
     const { status } = $props();
 
     let background = $state("");
 
-    if (status === Status.good) {
+    if (status === "GOOD") {
         background = "bg-emerald-500";
     }
 
-    if (status === Status.ok) {
+    if (status === "OK") {
         background = "bg-amber-500";
     }
 
-    if (status === Status.bad) {
+    if (status === "BAD") {
         background = "bg-rose-500";
     }
 </script>
