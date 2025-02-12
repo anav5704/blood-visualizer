@@ -33,6 +33,19 @@ export const Substances = [
         category: "Blood",
     },
 ]
+
+export const LabPresets = [
+    {
+        name: "Lab name",
+        values: {
+            // Update range for new substance for all labs
+            wbc: { 
+                min: 4,
+                max: 11
+            },
+        },
+    },
+]
 ```
 
 ## Learning Resources
