@@ -1,22 +1,31 @@
-import type { Substance } from "@prisma/client"
-import { Status } from "@/utils/const"
+import { Status } from "@prisma/client";
+import { LabPresets } from "./const";
 
-export const getSingularStatus = (substance: Substance) => {
-    const { value, min, max } = substance
+interface Props {
+    lab: string;
+    name: string;
+    value: number;
+}
 
-    const midpoint = (max + min) / 2
-    const range = max - min
-    const deviation = Math.abs(value - midpoint) / (range / 2)
+export const getSingularStatus = ({ lab, name, value }: Props) => {
+    const preset = LabPresets.find((preset) => preset.name == lab);
+
+    // @ts-ignore
+    const min = preset?.values[name].min;
+    // @ts-ignore
+    const max = preset?.values[name].max;
+
+    const mid = (max + min) / 2;
+    const range = max - min;
+    const deviation = Math.abs(value - mid) / (range / 2);
 
     if (value < min || value > max) {
-        return Status.bad
+        return Status.BAD;
     }
 
     if (deviation > 0.7) {
-        return Status.ok
+        return Status.OK;
+    } else {
+        return Status.GOOD;
     }
-
-    else {
-        return Status.good
-    }
-}
+};

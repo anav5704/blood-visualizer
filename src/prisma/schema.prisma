@@ -18,12 +18,19 @@ model Test {
 }
 
 model Substance {
-    id    String @id @default(uuid())
-    name  String // substance names are hard coded in the application: src/utils/const/index.ts
-    value Float // substance value range is hardcoded in the application: src/utils/const/index.ts
+    id     String @id @default(uuid())
+    name   String // substance names are hard coded in the application: src/utils/const/index.ts
+    value  Float // substance value range is hardcoded in the application: src/utils/const/index.ts
+    status Status
 
     testId String
     test   Test   @relation(fields: [testId], references: [id], name: "SubstanceToTest", onDelete: Cascade)
 
     @@index([id, testId])
+}
+
+enum Status {
+    GOOD
+    OK
+    BAD
 }
