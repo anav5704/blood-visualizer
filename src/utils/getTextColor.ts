@@ -1,15 +1,13 @@
-import { Status } from "@prisma/client";
-
-export const getTextColor = (status: Status) => {
-    if (status === Status.GOOD) {
+export const getTextColor = (status: "GOOD" | "OK" | "BAD") => {
+    if (status === "GOOD") {
         return "text-emerald-500";
     }
 
-    if (status === Status.OK) {
+    if (status === "OK") {
         return "text-amber-500";
     }
 
-    if (status === Status.BAD) {
+    if (status === "BAD") {
         return "text-rose-500";
     }
 };

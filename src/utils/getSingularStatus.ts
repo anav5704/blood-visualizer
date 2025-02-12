@@ -1,4 +1,3 @@
-import { Status } from "@prisma/client";
 import { LabPresets } from "./const";
 
 interface Props {
@@ -20,12 +19,12 @@ export const getSingularStatus = ({ lab, name, value }: Props) => {
     const deviation = Math.abs(value - mid) / (range / 2);
 
     if (value < min || value > max) {
-        return Status.BAD;
+        return "BAD";
     }
 
     if (deviation > 0.7) {
-        return Status.OK;
+        return "OK";
     } else {
-        return Status.GOOD;
+        return "GOOD";
     }
 };
