@@ -1,6 +1,8 @@
 import { type Actions, redirect } from "@sveltejs/kit";
 import type { Substance } from "@prisma/client";
 import { db } from "@/prisma";
+import { LabPresets, type ValueType } from "@/utils/const/index.js";
+import { getSingularStatus } from "@/utils/getSingularStatus.js";
 
 export const load = async ({ parent }) => {
     await parent();
@@ -32,11 +34,18 @@ export const actions: Actions = {
 
         names.forEach((name, index) => {
             if (values[index]) {
+                const status = getSingularStatus({
+                    lab,
+                    name: names[index],
+                    value: parseFloat(values[index]),
+                });
+
                 substances.push({
                     id: crypto.randomUUID(),
                     name,
-                    testId,
                     value: parseFloat(values[index]),
+                    status,
+                    testId,
                 });
             }
         });

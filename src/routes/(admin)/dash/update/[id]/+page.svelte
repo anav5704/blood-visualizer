@@ -53,7 +53,7 @@
 
     {#each Substances as { id, name }}
         {@const exists = data?.test?.substances.find(
-            (substance) => substance.name === name
+            (substance) => substance.name == id
         )}
         <label>
             <div class="flex gap-2">
@@ -62,7 +62,7 @@
                     {values[id].min}-{values[id].max}
                 </p>
             </div>
-            <input type="text" name="name[]" value={name} hidden />
+            <input type="text" name="name[]" value={id} hidden />
             <input
                 value={exists ? exists.value : ""}
                 placeholder={name}

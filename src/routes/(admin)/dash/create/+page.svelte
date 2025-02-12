@@ -47,7 +47,7 @@
                     {values[id].min}-{values[id].max}
                 </p>
             </div>
-            <input type="text" name="name[]" value={name} hidden />
+            <input type="text" name="name[]" value={id} hidden />
             <input placeholder={name} type="string" name="value[]" />
         </label>
     {/each}
