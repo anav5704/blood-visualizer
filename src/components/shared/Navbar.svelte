@@ -2,7 +2,7 @@
     import { page } from "$app/state";
     let { user } = $props();
 
-    const links = [
+    const links = $derived([
         {
             label: "Home",
             href: "/",
@@ -25,7 +25,7 @@
                 page.url.pathname.includes("/dash") ||
                 page.url.pathname == "/login",
         },
-    ];
+    ]);
 </script>
 
 <div class="px-6 py-3 rounded-xl bg-zinc-900 flex justify-between items-center">
