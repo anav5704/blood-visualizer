@@ -1,24 +1,28 @@
-import { getAggregateStatus } from "@/utils/getAggregateStatus"
-import { db } from "@/prisma"
+import { getAggregateStatus } from "@/utils/getAggregateStatus";
+import { db } from "@/prisma";
 
 export const load = async () => {
     const stream = async () => {
         const rawTests = await db.test.findMany({
             include: {
-                substances: true
+                substances: {
+                    include: {
+                        test: true,
+                    },
+                },
             },
             orderBy: {
-                date: "desc"
-            }
-        })
+                date: "desc",
+            },
+        });
 
         const tests = rawTests.map((test) => ({
             ...test,
-            status: getAggregateStatus(test.substances)
-        }))
+            status: getAggregateStatus(test.substances),
+        }));
 
-        return { tests }
-    }
+        return { tests };
+    };
 
-    return { stream: stream() }
-}
+    return { stream: stream() };
+};

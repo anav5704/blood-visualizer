@@ -1,38 +1,36 @@
-import { db } from "@/prisma"
+import { db } from "@/prisma";
 
 export const load = async () => {
     const stream = async () => {
-        const [test, testCount, substanceCount, healthyCount] = await db.$transaction([
-            db.test.findFirst({
-                include: {
-                    substances: true,
-                },
-                orderBy: {
-                    date: "desc"
-                }
-            }),
+        const [test, testCount, substanceCount, healthyCount] =
+            await db.$transaction([
+                db.test.findFirst({
+                    include: {
+                        substances: true,
+                    },
+                    orderBy: {
+                        date: "desc",
+                    },
+                }),
 
-            db.test.count(),
+                db.test.count(),
 
-            db.substance.count(),
+                db.substance.count(),
 
-            db.substance.count({
-                where: {
-                    AND: [
-                        { value: { gt: db.substance.fields.min } },
-                        { value: { lt: db.substance.fields.max } },
-                    ],
-                },
-            })
-        ])
+                db.substance.count({
+                    where: {
+                        status: "GOOD",
+                    },
+                }),
+            ]);
 
         return {
             test,
             testCount,
             substanceCount,
-            healthyCount: Math.floor((healthyCount / substanceCount) * 100)
-        }
-    }
+            healthyCount: Math.floor((healthyCount / substanceCount) * 100),
+        };
+    };
 
-    return { stream: stream() }
-}
+    return { stream: stream() };
+};

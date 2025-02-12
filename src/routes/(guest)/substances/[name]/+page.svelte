@@ -1,7 +1,8 @@
 <script lang="ts">
-    import ChartLoader from "@/components/guest/ChartLoader.svelte";
     import SubstanceChart from "@/components/guest/SubstanceChart.svelte";
+    import ChartLoader from "@/components/guest/ChartLoader.svelte";
     import { getTextColor } from "@/utils/getTextColor.js";
+    import { LabPresets, Substances } from "@/utils/const/index.js";
 
     const { data } = $props();
 </script>
@@ -10,19 +11,26 @@
     <h1>Substances</h1>
     <ChartLoader />
 {:then stream}
-    <h1>Substances / {stream.substance.name.split("-").join(" ")}</h1>
+    <h1>
+        Substances / {Substances.find((s) => stream.substance.name === s.id)
+            ?.name}
+    </h1>
 
     <div class="card p-6 space-y-6">
         <SubstanceChart data={stream.chartData} />
 
         <hr />
 
-        {#each stream.substance.instances as instance}
+        {#each stream.substance.instances as { name, value, status, test }}
+            {@const preset = LabPresets.find((p) => p.name === test.lab)}
+            {@const { min, max } = preset?.values[name]}
             <div class="flex justify-between">
-                <p>{instance.test.date.toDateString()}</p>
-                <div class="flex gap-10">
-                    <p class={getTextColor(instance)}>{instance.value}</p>
-                    <p class="text-zinc-500">{instance.min}-{instance.max}</p>
+                <a href={"/tests/" + test.id}>{test.date.toDateString()}</a>
+                <div class="flex">
+                    <p class={getTextColor(status)}>
+                        {value}
+                    </p>
+                    <p class="faded w-[100px] text-right">{min}-{max}</p>
                 </div>
             </div>
         {/each}

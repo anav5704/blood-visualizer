@@ -5,7 +5,7 @@
 
 <a
     class="group card flex justify-between items-center"
-    href={"/substances/" + substance.name.split(" ").join("-")}
+    href={"/substances/" + substance.id}
 >
     <div>
         <p>{substance.name}</p>
